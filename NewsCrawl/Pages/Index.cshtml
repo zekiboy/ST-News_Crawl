@@ -1,0 +1,84 @@
+﻿@page
+@model NewsListModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haber Listesi</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .news-item {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            box-sizing: border-box;
+            justify-content: space-between; /* Kart içeriğini yukarı ve aşağıya yayarak butonları hizalar */
+        }
+
+            .news-item img {
+                width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+
+            .news-item h3 {
+                margin-bottom: auto; /* Başlık kısmı üstte olur, alt kısmı otomatik olarak boşluk bırakır */
+            }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-md-4 {
+            margin-bottom: 30px; /* Margin between rows */
+        }
+
+        .btn {
+            margin-top: 10px; /* Buton ile başlık arasına boşluk ekler */
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center">Haber Listesi</h1>
+    <div class="container">
+        <div class="container">
+
+            <form method="get" class="search-form">
+                <div class="form-group">
+                    <label for="searchQuery">Haber Ara:</label>
+                    <input type="text" class="form-control" id="searchQuery" name="query" value="@Model.Query" placeholder="Haber başlığı girin...">
+                </div>
+                <button type="submit" class="btn btn-primary">Ara</button>
+            </form>
+        </div>
+        <br />
+        <div class="container">
+            <div class="row">
+                @foreach (var news in Model.NewsList)
+                {
+                    <div class="col-md-4">
+                        <div class="news-item">
+                            <a href="@news.Link" target="_blank">
+                                <img src="@news.ImageUrl" alt="@news.Title" class="img-fluid" />
+                            </a>
+                            <h3>@news.Title</h3>
+                            <a href="@news.Link" class="btn btn-primary">Daha Fazlası</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
